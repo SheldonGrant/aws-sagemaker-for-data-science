@@ -1,23 +1,18 @@
-"""Training script where data is retrieved on the instance
+"""Training script where data is provided by sagemaker input
 """
 import os
 import argparse
 from pathlib import Path
 import pandas as pd
-import numpy as np
-from sklearn import datasets
 from sklearn.svm import SVC
-from sklearn.model_selection import train_test_split
 import joblib
 
 
-def get_data():
-    iris = datasets.load_iris()
-    data = pd.DataFrame(
-        data=np.c_[iris["data"], iris["target"]],
-        columns=iris["feature_names"] + ["target"],
-    )
-    df_train, df_test = train_test_split(data, test_size=0.33, random_state=42)
+def get_data(train_path, test_path):
+
+    df_train = pd.read_csv(train_path, engine="python")
+
+    df_test = pd.read_csv(test_path, engine="python")
 
     return df_train, df_test
 
@@ -27,6 +22,18 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="training script")
 
     # important paths
+    parser.add_argument(
+        "--train",
+        type=str,
+        default=os.environ["SM_CHANNEL_TRAIN"],
+        help="path where training data is found.",
+    )
+    parser.add_argument(
+        "--test",
+        type=str,
+        default=os.environ["SM_CHANNEL_TEST"],
+        help="path where testing data is found.",
+    )
     parser.add_argument(
         "--model-dir",
         type=str,
@@ -50,7 +57,10 @@ if __name__ == "__main__":
 
     model_path = Path(args.model_dir, "model.joblib").as_posix()
     # query_data from athena
-    df_train, df_test = get_data()
+    df_train, df_test = get_data(
+        train_path=Path(args.train, "data.csv").as_posix(),
+        test_path=Path(args.test, "data.csv").as_posix()
+    )
 
     # preprocessing for the algorithm
     # X =

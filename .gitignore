@@ -2,3 +2,4 @@ Pipfile
 .env
 data/
 outputs/
+sandbox

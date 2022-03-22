@@ -17,6 +17,14 @@ In sagemaker there are 4 levels:
 - use 1st party algrorithms if possible, as it removes all the headache of writing your own scripts and often provides optimized models for simple model varieties i.e. classification, regression, clustering
 - use estimator layer if you need to provide your own docker containers for custom frameworks
 
+#### Docker, Sagemaker configuration and Environment variables
+
+##### Environment Variables
+
+Sagemaker makes use of environment variables to provide base paths to input data, output data and models
+
+- important-environment-variables  | https://github.com/aws/sagemaker-containers#important-environment-variables
+
 ### Sagemaker Script Mode
 
 - Bring your own model with sagemaker script mode (BYOM) | https://aws.amazon.com/blogs/machine-learning/bring-your-own-model-with-amazon-sagemaker-script-mode
