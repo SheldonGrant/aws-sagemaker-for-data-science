@@ -1,3 +1,5 @@
+"""Training script where data is provided by sagemaker input
+"""
 import os
 import argparse
 from pathlib import Path

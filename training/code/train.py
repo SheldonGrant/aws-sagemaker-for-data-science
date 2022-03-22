@@ -1,3 +1,5 @@
+"""Training script where data is retrieved on the instance
+"""
 import os
 import argparse
 from pathlib import Path
