@@ -10,7 +10,6 @@ from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 import joblib
 
-
 def get_data():
     iris = datasets.load_iris()
     data = pd.DataFrame(

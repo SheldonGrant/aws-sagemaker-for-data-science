@@ -55,9 +55,12 @@ if __name__ == "__main__":
         "instance_type": train_instance_type,
         "instance_count": 1,
         "hyperparameters": hyperparameters,
+        "env": {
+            'SAGEMAKER_REQUIREMENTS': 'requirements.txt', # file to pip install -r requirements.txt
+        },
         "output_path": output_path,
         "model_channel_name": "model",
-        "dependencies": [],  # provide python packages to install
+        "dependencies": ['requirements.txt'], # provide files needed i.e. utils.py or requirements.txt, etc
         "role": role,
         "base_job_name": "svclassifier-model",  # give sagemaker a naming seed, for which it generates a unique name
         "tags": [{"Key": "developer", "Value": f"{developer_name}"}],
