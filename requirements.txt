@@ -1,0 +1,9 @@
+# utils
+pandas
+scikit-learn
+numpy
+
+# dev
+sagemaker
+sagemaker[local]
+PyYaml
