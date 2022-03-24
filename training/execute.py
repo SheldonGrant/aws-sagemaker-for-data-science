@@ -60,7 +60,7 @@ if __name__ == "__main__":
         },
         "output_path": output_path,
         "model_channel_name": "model",
-        "dependencies": ['requirements.txt'], # provide files needed i.e. utils.py or requirements.txt, etc
+        "dependencies": ["requirements.txt"], # provide files needed i.e. utils.py or requirements.txt, etc
         "role": role,
         "base_job_name": "svclassifier-model",  # give sagemaker a naming seed, for which it generates a unique name
         "tags": [{"Key": "developer", "Value": f"{developer_name}"}],
