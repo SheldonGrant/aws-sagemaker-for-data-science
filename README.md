@@ -19,6 +19,17 @@ In sagemaker there are 4 levels:
 
 #### Docker, Sagemaker configuration and Environment variables
 
+At it's core, sagemaker is a configuration system built on docker and docker-compose. It passes your sdk and API configuration to the docker runtime as environment variables at runtime.
+
+To get a grasp of where you can find your data and model artifacts, take time to examine the following:
+- all data is written to or picked at a path starting with `/opt/ml`
+- Input, Output and Model paths consist of a base path called a channel, where the channel name matches the name of the data passed i.e. `/opt/ml/input/data/{channel_name}`.
+- your data will be fetched from an s3 directory prefix and stored at the matching channel_name i.e `/opt/ml/input/data/{channel_name}/data.csv`. 
+- pretrained or checkpointed models are written at `/opt/ml/model/{channel}`
+- write your trained model artifacts to `/opt/ml/model/{channel}/{file.name}`
+- write your other output artifacts i.e. graphics or lookup tables, etc to `/opt/ml/output/{channel}/{file.name}`
+- all output channels and model channels are written back to s3 automatically by sagemaker according to the output_data_path in the Estimator config.
+
 ##### Environment Variables
 
 Sagemaker makes use of environment variables to provide base paths to input data, output data and models
